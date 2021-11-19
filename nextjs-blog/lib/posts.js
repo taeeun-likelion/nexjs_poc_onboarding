@@ -35,3 +35,30 @@ export function getSortedPostsData() {
     }
   })
 }
+export function getAllPostIds() {
+  const fileNames = fs.readdirSync(postsDirectory)
+  //반환  형태 
+  //params:{
+  //  id: 'pre-rendering'
+  //}
+  return fileNames.map(fileName => {
+    return {
+      params: {
+        id: fileName.replace(/\.md$/, '')
+      }
+    }
+  }) //params가 array에 담겨서 리턴됨
+}
+export function getPostData(id) {
+  const fullPath = path.join(postsDirectory, `${id}.md`)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents)
+
+  // Combine the data with the id
+  return {
+    id,
+    ...matterResult.data
+  }
+}
