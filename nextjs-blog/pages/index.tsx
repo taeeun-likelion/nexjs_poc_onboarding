@@ -13,12 +13,6 @@ export const getStaticProps:GetStaticProps=async()=>{
   }
 }
 
-type IAllPostsDataTwo = {
-  id: string
-  date: string
-  title: string
-}
-
 interface IAllPostsData {
   id: string
   date: string
@@ -26,11 +20,10 @@ interface IAllPostsData {
 }
 
 interface IHome {
-  allPostsData : IAllPostsDataTwo[]
+  allPostsData : IAllPostsData[]
 }
 
 export default function Home({ allPostsData }: IHome) {
-  console.log(allPostsData)
   return (
     <Layout home>
       <Head>

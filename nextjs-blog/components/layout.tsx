@@ -6,11 +6,11 @@ import Link from 'next/link'
 
 const name = 'Taeeun Kim'
 export const siteTitle = 'Next.js Sample Website'
-
-export default function Layout({ children, home }:{
+interface ILayout{
   children:React.ReactNode
-  home?: boolean
-}) {
+  home?:boolean
+}
+export default function Layout({ children, home }:ILayout) {
   return (
     <div className={styles.container}>
       <Head>

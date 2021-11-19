@@ -4,7 +4,14 @@ import Head from 'next/head'
 import Date from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
 import { getAllPostIds, getPostData } from '../../lib/posts'
+interface IPostData{
+  postData:{
+    title:string
+    date:string
+    contentHtml:string
+  }
 
+}
 export const getStaticProps: GetStaticProps=async({ params })=> {
 
   const postData = await getPostData(params.id as string)  
@@ -23,14 +30,7 @@ export const getStaticPaths: GetStaticPaths=async()=> {
     fallback: false
   }
 }
-export default function Post({ postData }:{
-  postData:{
-    title:string
-    date:string
-    contentHtml:string
-  }
-}) {
-  console.log(postData)
+export default function Post({ postData }:IPostData) {
     return (
       <Layout>
         <Head>

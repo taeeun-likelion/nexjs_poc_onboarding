@@ -4,7 +4,10 @@ import matter from 'gray-matter'
 import {remark} from 'remark'
 import html from 'remark-html'
 const postsDirectory = path.join(process.cwd(), 'pages/posts')
-
+interface IMatterResult{
+  date:string
+  title: string
+}
 export function getSortedPostsData() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
@@ -22,7 +25,7 @@ export function getSortedPostsData() {
     // Combine the data with the id
     return {
       id,
-      ...matterResult.data as {date: string, title: string}
+      ...matterResult.data as IMatterResult
     }
   })
   // Sort posts by date
@@ -62,6 +65,6 @@ export async function getPostData(id) {
   return {
     id,
     contentHtml,
-    ...matterResult.data as {date:string, title: string}
+    ...matterResult.data as IMatterResult
   }
 }
